@@ -53,13 +53,19 @@ public class PlayerController : MonoBehaviour{
         pitch += Input.GetAxis("Mouse Y") * lookSensitivity;
         pitch = Mathf.Clamp(pitch, -45, 45);
 
-        Debug.Log(pitch);
-
         //x rotation of camera
         mainCameraTransform.localEulerAngles = new Vector3(-pitch, 0, 0);
 
         //y rotation of body
         transform.Rotate(0, Input.GetAxis("Mouse X") * lookSensitivity, 0);
 
+    }
+
+    public void OnTriggerEnter(Collider other) {
+        ItemPickUp itemPU = other.GetComponent<ItemPickUp>();
+        if (itemPU != null) {
+            Debug.Log("Found item");
+            itemPU.PickUpItem();
+        }
     }
 }

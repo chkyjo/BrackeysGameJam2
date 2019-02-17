@@ -9,7 +9,7 @@ public class ItemSlot : MonoBehaviour{
         itemId = ItemId.noTool;
     }
 
-    public void SetItem(Item item) {
+    public void SetItem(ItemScriptableObject item) {
         itemId = item.itemId;
         transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
         transform.GetChild(0).GetChild(0).GetComponent<RawImage>().texture = item.icon;

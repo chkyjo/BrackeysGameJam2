@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ItemsManager : MonoBehaviour
-{
+public class ItemsManager : MonoBehaviour{
+
+    ItemScriptableObject[] itemsList;
+
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Awake(){
+
     }
 
     // Update is called once per frame
@@ -15,9 +14,6 @@ public class ItemsManager : MonoBehaviour
     {
         
     }
-
-    
-
 }
 
 public enum ItemId {
