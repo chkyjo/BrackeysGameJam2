@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51db5b45447a03741a75cfaaecb12fe9, type: 3}
-  m_Name: Tool1
+  m_Script: {fileID: 11500000, guid: 230e6f48e80cf76428e2fdb288455286, type: 3}
+  m_Name: Journal3
   m_EditorClassIdentifier: 
-  itemId: 1
-  icon: {fileID: 2800000, guid: fce80ab8c59210b4eb4d12d311d2f9c6, type: 3}
-  type: 0
-  scanColor: {r: 1, g: 0, b: 0, a: 1}
+  itemId: 6
+  icon: {fileID: 2800000, guid: 50046b93a188a594a9f4b87b401d24af, type: 3}
+  type: 2
+  text: Text for journal 3

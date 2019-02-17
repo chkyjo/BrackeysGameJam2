@@ -3,25 +3,21 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour{
 
-    ItemId itemId;
+    Item _item;
 
-    private void Start() {
-        itemId = ItemId.noTool;
-    }
-
-    public void SetItem(ItemScriptableObject item) {
-        itemId = item.itemId;
+    public void SetItem(Item item) {
+        _item = item;
         transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
-        transform.GetChild(0).GetChild(0).GetComponent<RawImage>().texture = item.icon;
+        transform.GetChild(0).GetChild(0).GetComponent<RawImage>().texture = item.itemConfig.icon;
     }
 
     public void ClearSlot() {
-        itemId = 0;
+        _item = null;
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
     }
 
     public bool IsEmpty() {
-        if(itemId == ItemId.noTool) {
+        if(_item == null) {
             return true;
         }
 

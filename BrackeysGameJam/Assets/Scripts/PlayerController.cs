@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour{
 
+    public GameManager gameManager;
     public Transform mainCameraTransform;
 
     public Rigidbody rb;
@@ -11,14 +12,30 @@ public class PlayerController : MonoBehaviour{
     public int walkSpeed;
     public int runSpeed;
 
-
     public float lookSensitivity = 5;
     float yaw = 0; //y rotation
     float pitch = 0; //x rotation
 
+    int interactRange = 10;
+    LayerMask layerMask;
+
+    private void Start() {
+        layerMask = LayerMask.GetMask("Item");
+    }
+
     // Update is called once per frame
     void FixedUpdate(){
         Move();
+
+        RaycastHit hit;
+        if(Physics.Raycast(mainCameraTransform.position, mainCameraTransform.forward, out hit, interactRange, layerMask)) {
+            //enable UI
+            gameManager.EnableInteractUI();
+        }
+        else {
+            //enable UI
+            gameManager.DisableInteractUI();
+        }
     }
 
     private void Move() {

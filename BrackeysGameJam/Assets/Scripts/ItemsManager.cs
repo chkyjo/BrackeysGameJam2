@@ -2,23 +2,44 @@
 
 public class ItemsManager : MonoBehaviour{
 
-    ItemScriptableObject[] itemsList;
+    int numItems = 7;
+    Item[] itemsList;
+    public ItemObject[] itemObjectList;
 
     // Start is called before the first frame update
     void Awake(){
-
+        InitializeItemsList();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public Item GetItem(ItemId itemId) {
+        return itemsList[(int)itemId];
     }
+
+    void InitializeItemsList() {
+        itemsList = new Item[numItems];
+
+        for(int index = 0; index < numItems; index++) {
+            Debug.Log(index);
+            itemsList[index] = new Item();
+            itemsList[index].itemConfig = itemObjectList[index];
+        }
+
+    }
+}
+
+public enum ItemType {
+    Tool,
+    Throwable,
+    Journal
 }
 
 public enum ItemId {
     noTool,
     Tool1,
     Tool2,
-    Tool3
+    Tool3,
+    Journal1,
+    Journal2,
+    Journal3,
+
 }
