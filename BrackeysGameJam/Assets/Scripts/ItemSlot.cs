@@ -21,6 +21,8 @@ public class ItemSlot : MonoBehaviour{
             if(_item.itemConfig.type == ItemType.Tool) {
                 //equip tool
                 PlayerController.instance.EquipTool((Tool)_item);
+                PlayerController.instance.SendScan();
+                GameObject.Find("GameManager").GetComponent<GameManager>().UpdateScanLocation(PlayerController.instance.transform.position);
             }
             else if(_item.itemConfig.type == ItemType.Throwable) {
                 PlayerController.instance.EquipThrowable((Throwable)_item);
@@ -29,7 +31,12 @@ public class ItemSlot : MonoBehaviour{
                 GameObject.Find("GameManager").GetComponent<GameManager>().OpenJournal((Journal)_item);
             }
             else if (_item.itemConfig.type == ItemType.MusicPlayer) {
-                PlayerController.instance.PlayClip((MusicPlayer)_item);
+                if(PlayerController.instance.GetComponent<AudioSource>().clip == ((MusicPlayerObject)_item.itemConfig).clip) {
+                    PlayerController.instance.StopAudio();
+                }
+                else {
+                    PlayerController.instance.PlayClip((MusicPlayer)_item);
+                }
             }
         }
     }

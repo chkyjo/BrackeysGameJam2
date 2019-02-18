@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour{
     int interactRange = 10;
     LayerMask layerMask;
 
+    public GameObject floor;
+
     private void Awake() {
         if(instance == null) {
             instance = this;
@@ -93,6 +95,27 @@ public class PlayerController : MonoBehaviour{
 
     }
 
+    public void SendScan() {
+        gameManager.UpdateScanLocation(transform.position);
+        StartCoroutine(Scan());
+    }
+
+    IEnumerator Scan() {
+        float maxRadius = 15f;
+        Renderer shader = floor.GetComponent<Renderer>();
+        float radius = 0.7f;
+        while (radius < maxRadius) {
+            yield return new WaitForSeconds(0.01f);
+            radius += 0.1f;
+            shader.sharedMaterial.SetFloat("_Radius", radius);
+
+            //the closer the radius gets to 10 the darker the scan gets
+            float blackLevel = 255f * (radius / maxRadius);
+            shader.sharedMaterial.SetColor("_Color", new Color((255f - blackLevel) / 255f, (255f - blackLevel) / 255f, (255f - blackLevel) / 255f, 1));
+            Debug.Log(new Color((255f - blackLevel) / 255f, (255f - blackLevel) / 255f, (255f - blackLevel) / 255f, 1));
+        }
+    }
+
     public void EquipTool(Tool tool) {
 
     }
@@ -104,6 +127,11 @@ public class PlayerController : MonoBehaviour{
     public void PlayClip(MusicPlayer mP) {
         GetComponent<AudioSource>().clip = ((MusicPlayerObject)mP.itemConfig).clip;
         GetComponent<AudioSource>().Play();
+    }
+
+    public void StopAudio() {
+        GetComponent<AudioSource>().Stop();
+        GetComponent<AudioSource>().clip = null;
     }
 
     public void StopRotation() {
