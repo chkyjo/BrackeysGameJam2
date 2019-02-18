@@ -21,8 +21,6 @@ public class ItemSlot : MonoBehaviour{
             if(_item.itemConfig.type == ItemType.Tool) {
                 //equip tool
                 PlayerController.instance.EquipTool((Tool)_item);
-                PlayerController.instance.SendScan();
-                GameObject.Find("GameManager").GetComponent<GameManager>().UpdateScanLocation(PlayerController.instance.transform.position);
             }
             else if(_item.itemConfig.type == ItemType.Throwable) {
                 PlayerController.instance.EquipThrowable((Throwable)_item);

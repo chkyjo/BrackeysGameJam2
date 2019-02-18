@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Echolocation
-  m_Shader: {fileID: 4800000, guid: 09ee7597e631d7140b359094251a2437, type: 3}
+  m_Name: Journal2
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -67,13 +67,11 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Radius: 15.000021
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Center: {r: 10.419704, g: 1.2016952, b: 18.509483, a: 0}
-    - _Color: {r: 0, g: 0, b: -0.0000014305115, a: 1}
+    - _Color: {r: 0.50980395, g: 0.48905307, b: 0.34117648, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

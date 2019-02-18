@@ -5,6 +5,7 @@ public class ItemsManager : MonoBehaviour{
     int numItems = 9;
     Item[] itemsList;
     public ItemObject[] itemObjectList;
+    public GameObject[] itemPrefabList;
 
     // Start is called before the first frame update
     void Awake(){
@@ -13,6 +14,10 @@ public class ItemsManager : MonoBehaviour{
 
     public Item GetItem(ItemId itemId) {
         return itemsList[(int)itemId];
+    }
+
+    public GameObject GetPrefab(ItemId itemId) {
+        return itemPrefabList[(int)itemId];
     }
 
     void InitializeItemsList() {

@@ -22,7 +22,13 @@ public class PlayerController : MonoBehaviour{
     int interactRange = 10;
     LayerMask layerMask;
 
+    //player equip location for prefab
+    public GameObject hand;
+
     public GameObject floor;
+
+    Tool equippedTool = null;
+    bool scanInProgress = false;
 
     private void Awake() {
         if(instance == null) {
@@ -49,6 +55,14 @@ public class PlayerController : MonoBehaviour{
         else {
             //enable UI
             gameManager.DisableInteractUI();
+        }
+
+        if (Input.GetMouseButton(1)) {
+            if(equippedTool != null) {
+                if (!scanInProgress) {
+                    SendScan();
+                }
+            }
         }
     }
 
@@ -95,7 +109,9 @@ public class PlayerController : MonoBehaviour{
 
     }
 
+    //update center of scan and start coroutine
     public void SendScan() {
+
         gameManager.UpdateScanLocation(transform.position);
         StartCoroutine(Scan());
     }
@@ -104,20 +120,37 @@ public class PlayerController : MonoBehaviour{
         float maxRadius = 15f;
         Renderer shader = floor.GetComponent<Renderer>();
         float radius = 0.7f;
+        float delay = ((ToolObject)equippedTool.itemConfig).scanDelay;
+        Color scanColor = ((ToolObject)equippedTool.itemConfig).scanColor;
+        
+
+        scanInProgress = true;
         while (radius < maxRadius) {
             yield return new WaitForSeconds(0.01f);
             radius += 0.1f;
             shader.sharedMaterial.SetFloat("_Radius", radius);
 
             //the closer the radius gets to 10 the darker the scan gets
-            float blackLevel = 255f * (radius / maxRadius);
-            shader.sharedMaterial.SetColor("_Color", new Color((255f - blackLevel) / 255f, (255f - blackLevel) / 255f, (255f - blackLevel) / 255f, 1));
-            Debug.Log(new Color((255f - blackLevel) / 255f, (255f - blackLevel) / 255f, (255f - blackLevel) / 255f, 1));
+            float redLevel = scanColor.r * (radius / maxRadius);
+            float greenLevel = scanColor.g * (radius / maxRadius);
+            float blueLevel = scanColor.b * (radius / maxRadius);
+
+            //the closer the radius gets to max the darker the color gets until it fades to black
+            shader.sharedMaterial.SetColor("_Color", new Color(scanColor.r - redLevel, scanColor.g - greenLevel, scanColor.b - blueLevel, 1));
+            Debug.Log(new Color((scanColor.r - redLevel) / 255f, (scanColor.g - greenLevel) / 255f, (scanColor.b - blueLevel) / 255f, 1));
         }
+
+        yield return new WaitForSeconds(delay);
+
+        scanInProgress = false;
     }
 
     public void EquipTool(Tool tool) {
-
+        if(hand.transform.childCount > 0) {
+            Destroy(hand.transform.GetChild(0).gameObject);
+        }
+        Instantiate(GameObject.Find("GameManager").GetComponent<ItemsManager>().GetPrefab(tool.itemConfig.itemId), hand.transform);
+        equippedTool = tool;
     }
 
     public void EquipThrowable(Throwable throwable) {
