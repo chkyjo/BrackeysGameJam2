@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3447fba9c0d639489e1f5d07cac6c00, type: 3}
-  m_Name: Flare
+  m_Script: {fileID: 11500000, guid: 1c4ffe4f024e85346a040b101c5b44d2, type: 3}
+  m_Name: MusicPlayer1
   m_EditorClassIdentifier: 
-  itemId: 0
+  itemId: 8
   icon: {fileID: 0}
-  type: 1
+  type: 3
+  clip: {fileID: 0}
