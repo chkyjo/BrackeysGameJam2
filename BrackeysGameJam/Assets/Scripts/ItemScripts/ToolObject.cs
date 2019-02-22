@@ -7,6 +7,7 @@ public class ToolObject : ItemObject{
 
     public float scanDelay;
     public Color scanColor;
+    public AudioClip scanSound;
     
 
 }
