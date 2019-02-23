@@ -9,6 +9,12 @@ public class PlayerController : MonoBehaviour{
     public GameManager gameManager;
     public Transform mainCameraTransform;
 
+    public AudioClip walkSound;
+    AudioSource scanAudioSource;
+    AudioSource moveAudioSource;
+    AudioSource pickUpAudioSource;
+    AudioSource musicAudioSource;
+
     public Rigidbody rb;
 
     public int walkSpeed;
@@ -40,6 +46,10 @@ public class PlayerController : MonoBehaviour{
     }
 
     private void Start() {
+        scanAudioSource = GetComponents<AudioSource>()[0];
+        moveAudioSource = GetComponents<AudioSource>()[1];
+        pickUpAudioSource = GetComponents<AudioSource>()[2];
+        musicAudioSource = GetComponents<AudioSource>()[3];
         layerMask = LayerMask.GetMask("Item");
     }
 
@@ -87,7 +97,18 @@ public class PlayerController : MonoBehaviour{
         Vector3 velocity = direction * walkSpeed;
 
         if(velocity != Vector3.zero) {
+            if(moveAudioSource.clip == null) {
+                moveAudioSource.clip = walkSound;
+                moveAudioSource.loop = true;
+                moveAudioSource.Play();
+            }
             rb.MovePosition(transform.position + velocity * Time.deltaTime);
+        }
+        else {
+            if(moveAudioSource != null) {
+                moveAudioSource.Stop();
+                moveAudioSource.clip = null;
+            }
         }
 
     }
@@ -122,12 +143,14 @@ public class PlayerController : MonoBehaviour{
         float radius = 0.7f;
         float delay = ((ToolObject)equippedTool.itemConfig).scanDelay;
         Color scanColor = ((ToolObject)equippedTool.itemConfig).scanColor;
-        
+
+        scanAudioSource.clip = ((ToolObject)equippedTool.itemConfig).scanSound;
+        scanAudioSource.Play();
 
         scanInProgress = true;
         while (radius < maxRadius) {
             yield return new WaitForSeconds(0.01f);
-            radius += 0.1f;
+            radius += 0.05f;
             shader.sharedMaterial.SetFloat("_Radius", radius);
 
             //the closer the radius gets to 10 the darker the scan gets
@@ -137,7 +160,6 @@ public class PlayerController : MonoBehaviour{
 
             //the closer the radius gets to max the darker the color gets until it fades to black
             shader.sharedMaterial.SetColor("_Color", new Color(scanColor.r - redLevel, scanColor.g - greenLevel, scanColor.b - blueLevel, 1));
-            Debug.Log(new Color((scanColor.r - redLevel) / 255f, (scanColor.g - greenLevel) / 255f, (scanColor.b - blueLevel) / 255f, 1));
         }
 
         yield return new WaitForSeconds(delay);
@@ -158,8 +180,8 @@ public class PlayerController : MonoBehaviour{
     }
 
     public void PlayClip(MusicPlayer mP) {
-        GetComponent<AudioSource>().clip = ((MusicPlayerObject)mP.itemConfig).clip;
-        GetComponent<AudioSource>().Play();
+        musicAudioSource.clip = ((MusicPlayerObject)mP.itemConfig).clip;
+        musicAudioSource.Play();
     }
 
     public void StopAudio() {

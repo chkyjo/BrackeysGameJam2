@@ -104,6 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025f0618c2f60fd48b0a8954fa28476b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToGet: 2
+  itemToGet: 3
   _item:
     itemConfig: {fileID: 0}

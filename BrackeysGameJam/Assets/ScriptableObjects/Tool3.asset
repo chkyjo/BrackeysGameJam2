@@ -17,3 +17,4 @@ MonoBehaviour:
   type: 0
   scanDelay: 1
   scanColor: {r: 0, g: 0, b: 1, a: 1}
+  scanSound: {fileID: 8300000, guid: 8c4d869b5b7e15a46993b109d4352f4c, type: 3}
