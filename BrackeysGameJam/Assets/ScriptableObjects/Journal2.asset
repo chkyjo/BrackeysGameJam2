@@ -15,4 +15,5 @@ MonoBehaviour:
   itemId: 5
   icon: {fileID: 2800000, guid: ae04844614494c340b1ada8b60fc962f, type: 3}
   type: 2
-  text: Text for journal 2
+  text: We're running very low on everything. Signs of raiders are everywhere. It
+    isn't safe to scavenge in the cities.
