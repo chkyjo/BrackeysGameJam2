@@ -9,7 +9,8 @@ public class AudioManager : MonoBehaviour{
 
     // Start is called before the first frame update
     void Awake(){
-
+        //GetComponent<AudioSource>().clip = audioClips[0];
+        //GetComponent<AudioSource>().Play();
     }
 
     public AudioClip GetAudio(ClipIds clipId) {

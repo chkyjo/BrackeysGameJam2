@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour{
     public Transform mainCameraTransform;
 
     public AudioClip walkSound;
+    public AudioClip ambientMusic;
     AudioSource scanAudioSource;
     AudioSource moveAudioSource;
     AudioSource pickUpAudioSource;
@@ -50,6 +51,8 @@ public class PlayerController : MonoBehaviour{
         moveAudioSource = GetComponents<AudioSource>()[1];
         pickUpAudioSource = GetComponents<AudioSource>()[2];
         musicAudioSource = GetComponents<AudioSource>()[3];
+        musicAudioSource.clip = ambientMusic;
+        musicAudioSource.Play();
         layerMask = LayerMask.GetMask("Item");
     }
 

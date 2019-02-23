@@ -30,7 +30,7 @@ public class ItemsManager : MonoBehaviour{
         itemsList[4] = new Journal();
         itemsList[5] = new Journal();
         itemsList[6] = new Journal();
-        itemsList[7] = new Throwable();
+        itemsList[7] = new MusicPlayer();
         itemsList[8] = new MusicPlayer();
 
         for (int index = 0; index < numItems; index++) {
@@ -55,6 +55,6 @@ public enum ItemId {
     Journal1,
     Journal2,
     Journal3,
-    Flare,
-    MusicPlayer
+    MusicPlayer,
+    MusicPlayer2
 }

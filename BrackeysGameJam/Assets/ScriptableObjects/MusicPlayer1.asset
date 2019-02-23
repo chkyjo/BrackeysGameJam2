@@ -15,4 +15,4 @@ MonoBehaviour:
   itemId: 8
   icon: {fileID: 2800000, guid: fce80ab8c59210b4eb4d12d311d2f9c6, type: 3}
   type: 3
-  clip: {fileID: 8300000, guid: fa02074510f44964cbb4a27513acf968, type: 3}
+  clip: {fileID: 8300000, guid: 2626377b986ed144c90bcd63242b004a, type: 3}
